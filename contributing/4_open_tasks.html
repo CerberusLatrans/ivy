@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ivy Applied Libraries Development Guide" href="5_applied_libraries.html" />
-    <link rel="prev" title="Ivy Frontend Tests" href="../deep_dive/17_ivy_frontends_tests.html" /> 
+    <link rel="next" title="Applied Libraries" href="5_applied_libraries.html" />
+    <link rel="prev" title="Exception Handling" href="../deep_dive/18_exception_handling.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -63,7 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#ivy-api-extensions">Ivy API Extensions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="5_applied_libraries.html">Ivy Applied Libraries Development Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_applied_libraries.html">Applied Libraries</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../deep_dive.html">Deep Dive</a></li>
@@ -341,7 +341,7 @@ sub-directories to choose from:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>creation_routines
 fft
 indexing_routines
-<span class="hll">linear_algebra
+<span class="hll">linalg
 </span>logic
 ma
 manipulation_routines
@@ -354,16 +354,23 @@ statistics
 ufunc
 </pre></div>
 </div>
-<p>There is a <code class="code docutils literal notranslate"><span class="pre">linear_algebra</span></code> sub-directory, so we choose this. There is then a linalg sub-directory. From the numpy
-API, we can see that certain functions listed under ‘Linear Algebra (<code class="code docutils literal notranslate"><span class="pre">numpy.linalg</span></code>)’ actually do <em>not</em> require the
-linalg namespace. <code class="code docutils literal notranslate"><span class="pre">inner</span></code> is one such function, hence it will not be placed in this directory. We then need to choose
-from the files at this hierarchy (ignoring <code class="code docutils literal notranslate"><span class="pre">__init__.py</span></code> files):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll">matrix_and_vector_products.py
-</span>norms_and_other_numbers.py
+<p>There is a <code class="code docutils literal notranslate"><span class="pre">linalg</span></code> sub-directory, so we choose this. Then we need to choose
+from the files at this hierarchy:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>__init__.py
+decompositions.py
+<span class="hll">matrix_and_vector_products.py
+</span>matrix_eigenvalues.py
+norms_and_other_numbers.py
+solving_equations_and_inverting_matrices.py
 </pre></div>
 </div>
 <p>This may require a bit of reasoning. <code class="code docutils literal notranslate"><span class="pre">inner</span></code> calculates the inner product of two arrays, so
-<code class="code docutils literal notranslate"><span class="pre">matrix_and_vector_products.py</span></code> seems like the most appropriate option. The location of
+<code class="code docutils literal notranslate"><span class="pre">matrix_and_vector_products.py</span></code> seems like the most appropriate option. It is important to note that some functions
+require the <code class="code docutils literal notranslate"><span class="pre">np.linalg.[func]</span></code> namespace, as can gleamed from the numpy <a class="reference external" href="https://numpy.org/doc/stable/reference/routines.linalg.html">reference API</a>.
+These functions are listed out under the <code class="code docutils literal notranslate"><span class="pre">functional/frontends/numpy/__init__.py</span></code> <a class="reference external" href="https://github.com/unifyai/ivy/blob/38dbb607334cb32eb513630c4496ad0024f80e1c/ivy/functional/frontends/numpy/__init__.py#L27">imports</a>. There are some
+functions which have not been implemented yet, and are therefore commented out. Once you have finished the implementation of
+one of these functions, uncomment it from the list.</p>
+<p>The location of
 <code class="code docutils literal notranslate"><span class="pre">test_numpy_inner</span></code> should mirror the location of its corresponding function, this time in
 <code class="code docutils literal notranslate"><span class="pre">ivy_tests/test_ivy/test_frontends/[backend]</span></code>.</p>
 <p>If you’re unsure about where to put the function you’re working on, explore the content of these files to see if you
@@ -412,8 +419,8 @@ or reach out on <a class="reference external" href="https://discord.gg/ZVQdvbzNQ
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../deep_dive/17_ivy_frontends_tests.html" class="btn btn-neutral float-left" title="Ivy Frontend Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="5_applied_libraries.html" class="btn btn-neutral float-right" title="Ivy Applied Libraries Development Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../deep_dive/18_exception_handling.html" class="btn btn-neutral float-left" title="Exception Handling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="5_applied_libraries.html" class="btn btn-neutral float-right" title="Applied Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
